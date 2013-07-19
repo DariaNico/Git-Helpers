@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+s = `git status --porcelain`
+s = s.split("\n")
+a = s.map{ |f| f.gsub(/.* /,'') }
+
+system "#{ ENV['EDITOR'] } #{ ARGV.join(' ') } #{ a.join(" ") }"
+
