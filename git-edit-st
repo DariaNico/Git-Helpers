@@ -1,8 +1,11 @@
 #!/usr/bin/env ruby
 
-s = `git status --porcelain`
-s = s.split("\n")
-a = s.map{ |f| f.gsub(/.* /,'') }
-
-system "#{ ENV['EDITOR'] } #{ ARGV.join(' ') } #{ a.join(" ") }"
-
+if ARGV.include?("--help") || ARGV.include?("-h")
+  puts "usage: #$PROGRAM_NAME [arguments] - edit git status files passing arguments to editor"
+else
+  s = `git status --porcelain`
+  s = s.split("\n")
+  a = s.map{ |f| f.gsub(/.* /,'') }
+  
+  system "#{ ENV['EDITOR'] } #{ ARGV.join(' ') } #{ a.join(" ") }"
+end
